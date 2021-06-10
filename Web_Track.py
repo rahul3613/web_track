@@ -65,7 +65,7 @@ while True:
                                                 if (web_data[distt][pinc][user]['cvsh']=='True' and cent['vaccine']=='COVISHIELD') or (web_data[distt][pinc][user]['covax']=='True' and cent['vaccine']=='COVAXIN') or (web_data[distt][pinc][user]['sptk']=='True' and cent['vaccine']=='SPUTNIK V'):
                                                     if cent['center_id'] not in web_data[distt][pinc][user]['slot'][str(day)]:
 
-                                                        driver.get('https://slotalert.herokuapp.com/slot/putdata/{}/{}/{}/'.format(user, day, cent['center_id']))
+                                                        put = requests.get('https://slotalert.herokuapp.com/slot/putdata/{}/{}/{}/'.format(user, day, cent['center_id']))
                                                         print('Updated: /putdata/{}/{}/{}/'.format(user, day, cent['center_id']))
                                                         print('Pin: ' + str(cent['pincode']))
 
