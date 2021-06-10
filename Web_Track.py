@@ -14,7 +14,7 @@ while True:
     print('New loop Time: ' + str(datetime.now().strftime("%H:%M:%S")))
     
     try:
-        response = requests.get("https://slotalert.herokuapp.com/slot/getfulldata", timeout=10)
+        response = requests.get("https://slotalert.herokuapp.com/slot/getfulldata", timeout=30)
         web_data = response.json()
 
         for day in [1,2,3,1,4,5]:
@@ -29,7 +29,7 @@ while True:
 
                     while True:
 
-                        response = requests.get("https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id={}&date={}".format(distt, dt), timeout=5)
+                        response = requests.get("https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id={}&date={}".format(distt, dt), timeout=20)
                         data = response.json()
                         
                         if 'sessions' in data.keys():
