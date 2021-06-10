@@ -47,7 +47,7 @@ while True:
                         if 'sessions' in data.keys():
                             break
                         
-                        playsound('C:/Users/rahul/OneDrive/Desktop/Ensoniq-ZR-76-01-Dope-77.wav')
+                        playsound('data/data/com.termux/files/web2/web_track/test.wav')
                         print("Too many requests")
                         time.sleep(1)
 
