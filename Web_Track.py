@@ -6,30 +6,18 @@
 import time
 from datetime import datetime, date, timedelta
 import requests
-from playsound import playsound
 
-
-# In[4]:
-
-t1 = time.time()
-
-# In[ ]:
 
 
 while True:
     
-    t2 = time.time()
-    if t2-t1<60:
-        time.sleep(60-(t2-t1))
-    t1 = time.time()
-    
     print('New loop Time: ' + str(datetime.now().strftime("%H:%M:%S")))
     
     try:
-        response = requests.get("https://slotalert.herokuapp.com/slot/getfulldata")
+        response = requests.get("https://slotalert.herokuapp.com/slot/getfulldata", timeout=10)
         web_data = response.json()
 
-        for day in [1,2,3,4,1,5]:
+        for day in [1,2,3,1,4,5]:
             print("Check: " + str(day))
 
             today = date.today()
@@ -41,7 +29,7 @@ while True:
 
                     while True:
 
-                        response = requests.get("https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id={}&date={}".format(distt, dt))
+                        response = requests.get("https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id={}&date={}".format(distt, dt), timeout=5)
                         data = response.json()
                         
                         if 'sessions' in data.keys():
