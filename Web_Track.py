@@ -3,21 +3,16 @@
 
 # In[1]:
 
-
-import smtplib, ssl
-from selenium import webdriver
-from selenium.webdriver.support.ui import Select
-import json
 import time
 from datetime import datetime, date, timedelta
+import requests
+from pysinewave import SineWave
 
 
 # In[4]:
 
-
-driver = webdriver.Chrome("C:/Users/rahul/Downloads/chromedriver_win32/chromedriver.exe")
 t1 = time.time()
-
+sinewave = SineWave(pitch = 27)
 
 # In[ ]:
 
@@ -30,14 +25,12 @@ while True:
     t1 = time.time()
     
     print('New loop Time: ' + str(datetime.now().strftime("%H:%M:%S")))
+    
     try:
-        link = "https://slotalert.herokuapp.com/slot/getfulldata"
-        driver.get(link)
-        pre = driver.find_element_by_tag_name("body").text
-        web_data = json.loads(pre)
-        web_data
+        response = requests.get("https://slotalert.herokuapp.com/slot/getfulldata")
+        web_data = response.json()
 
-        for day in [1,2,5,1,4,3]:
+        for day in [1,2,3,4,1,5]:
             print("Check: " + str(day))
 
             today = date.today()
@@ -49,18 +42,16 @@ while True:
 
                     while True:
 
-                        link = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id={}&date={}".format(distt, dt)
-                        driver.get(link)
-                        pre = driver.find_element_by_tag_name("pre").text
-
-                        if pre[0:12] == '{"sessions":':
+                        response = requests.get("https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id={}&date={}".format(distt, dt))
+                        data = response.json()
+                        
+                        if 'sessions' in data.keys():
                             break
                         
-                        print("Sleeping due to too many requests")
-                        time.sleep(60)
-
-
-                    data = json.loads(pre)
+                        sinewave.play()
+                        print("Too many requests")
+                        time.sleep(3)
+                        sinewave.stop()
 
 
                     for pinc in web_data[distt].keys():
@@ -82,5 +73,4 @@ while True:
 
     except:
         print("Sleeping due to error")
-        time.sleep(10)
-
+        time.sleep(5)
