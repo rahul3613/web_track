@@ -47,9 +47,8 @@ while True:
                         if 'sessions' in data.keys():
                             break
                         
-                        playsound('data/data/com.termux/files/web2/web_track/test.wav')
                         print("Too many requests")
-                        time.sleep(1)
+                        time.sleep(10)
 
 
                     for pinc in web_data[distt].keys():
