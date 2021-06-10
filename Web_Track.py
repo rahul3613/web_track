@@ -6,13 +6,12 @@
 import time
 from datetime import datetime, date, timedelta
 import requests
-from pysinewave import SineWave
+from playsound import playsound
 
 
 # In[4]:
 
 t1 = time.time()
-sinewave = SineWave(pitch = 27)
 
 # In[ ]:
 
@@ -48,10 +47,9 @@ while True:
                         if 'sessions' in data.keys():
                             break
                         
-                        sinewave.play()
+                        playsound('C:/Users/rahul/OneDrive/Desktop/Ensoniq-ZR-76-01-Dope-77.wav')
                         print("Too many requests")
-                        time.sleep(3)
-                        sinewave.stop()
+                        time.sleep(1)
 
 
                     for pinc in web_data[distt].keys():
