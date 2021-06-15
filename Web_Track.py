@@ -16,6 +16,13 @@ while True:
     try:
         response = requests.get("https://slotalert.herokuapp.com/slot/getdata", timeout=30)
         web_data = response.json()
+        
+        for distt in web_data.keys():
+            for pinc in web_data[distt].keys():
+                for user in web_data[distt][pinc].keys():
+                    if web_data[distt][pinc][user]['notify'] == 'True':
+                        web_data[distt]["pass"] = "True"
+                        break
 
         for day in [1,2,3,1,4,5]:
             print("Check: " + str(day))
@@ -25,7 +32,7 @@ while True:
             dt = today.strftime("%d-%m-%y")
 
             for distt in web_data.keys():
-                if len(web_data[distt])>0:
+                if web_data[distt]["pass"] == "True":
 
                     while True:
 
