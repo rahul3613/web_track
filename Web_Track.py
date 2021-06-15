@@ -14,7 +14,7 @@ while True:
     print('New loop Time: ' + str(datetime.now().strftime("%H:%M:%S")))
     
     try:
-        response = requests.get("https://slotalert.herokuapp.com/slot/getdata", timeout=30)
+        response = requests.get("https://slotalert.herokuapp.com/slot/getfulldata", timeout=30)
         web_data = response.json()
         
         for distt in web_data.keys():
