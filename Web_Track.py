@@ -12,7 +12,7 @@ import requests
 while True:
     
     print('New loop Time: ' + str(datetime.now().strftime("%H:%M:%S")))
-    pass_list = {}
+    pass_list = set()
     
     try:
         response = requests.get("https://slotalert.herokuapp.com/slot/getfulldata", timeout=30)
