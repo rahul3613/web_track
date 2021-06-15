@@ -12,6 +12,7 @@ import requests
 while True:
     
     print('New loop Time: ' + str(datetime.now().strftime("%H:%M:%S")))
+    pass_list = {}
     
     try:
         response = requests.get("https://slotalert.herokuapp.com/slot/getfulldata", timeout=30)
@@ -21,7 +22,7 @@ while True:
             for pinc in web_data[distt].keys():
                 for user in web_data[distt][pinc].keys():
                     if web_data[distt][pinc][user]['notify'] == 'True':
-                        web_data[distt]["pass"] = "True"
+                        pass_list.add(distt)
                         break
 
         for day in [1,2,3,1,4,5]:
@@ -32,7 +33,7 @@ while True:
             dt = today.strftime("%d-%m-%y")
 
             for distt in web_data.keys():
-                if web_data[distt]["pass"] == "True":
+                if distt in pass_list:
 
                     while True:
 
