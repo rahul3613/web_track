@@ -24,6 +24,8 @@ while True:
                     if web_data[distt][pinc][user]['notify'] == 'True':
                         pass_list.add(distt)
                         break
+                        
+        print("dist: " + str(len(pass_list)))
 
         for day in [1,2,3,1,4,5]:
             print("Check: " + str(day))
