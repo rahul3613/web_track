@@ -7,6 +7,8 @@ import time
 from datetime import datetime, date, timedelta
 import requests
 
+t1 = time.time()
+t = 20
 
 
 while True:
@@ -28,6 +30,12 @@ while True:
         print("dist: " + str(len(pass_list)))
 
         for day in [1,2,3,1,4,5]:
+            
+            t2 = time.time()
+            if t2-t1<t:
+                time.sleep(t-(t2-t1))
+            t1 = time.time()
+    
             print("Check: " + str(day))
 
             today = date.today()
